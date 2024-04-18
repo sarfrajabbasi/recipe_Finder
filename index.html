@@ -18,5 +18,65 @@
         </div>
     </div>
 </body>
-<script src="./JS/foodfinder.js"></script>
+<!-- <script src="./JS/foodfinder.js"></script> -->
+<script>
+
+const searchForm = document.querySelector("form");
+const searchInput = document.querySelector('#search');
+const resultList = document.querySelector('#results');
+
+// Add event listener to the form to handle form submission
+searchForm?.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent default form submission
+    searchRecipe();
+});
+
+async function searchRecipe() {
+    const searchValue = searchInput.value.trim();
+    const response = await fetch(`https://api.edamam.com/search?q=${searchValue}&app_id=7aa516a5&app_key=dc836a223fb788b11ae390504d9e97ce&from=0&to=10`);
+    const data = await response.json();
+   
+    displayRecipes(data.hits);
+    searchInput.value = ''; // Clear search input
+}
+
+/**
+ * @param {any[]} recipes
+ */
+function displayRecipes(recipes) {
+    // Clear previous results
+    resultList.innerHTML = '';
+    let html
+    if(recipes.length !== 0){
+        // Generate HTML for new results
+        html = recipes.map(recipe => {
+            const ingredientLines = recipe.recipe.ingredientLines.map(ingredient => `<li>${ingredient}</li>`).join('');
+            return `
+                <div class="recipe-card">
+                    <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}" class="recipe-image">
+                    <div class="recipe-details">
+                        <h2 class="recipe-title">${recipe.recipe.label}</h2>
+                        <ul class="ingredient-list">
+                            ${ingredientLines}
+                        </ul>
+                        <a href="${recipe.recipe.url}" target="_blank" class="view-recipe">View Recipe</a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    
+    }else{
+        html = `
+        <div class="notFound">
+                <p><b> ${recipes.length} Result</b> For <span class="input">${searchInput.value}</span> </p>
+                <span class="try">Try another search </span>
+            </div>  
+        `
+    }
+    
+    // Append new HTML to resultList
+    resultList.innerHTML = html;
+}
+
+</script>
 </html>
