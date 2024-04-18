@@ -1,0 +1,174 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set up gradient background with animation */
+body {
+  background: linear-gradient(45deg, #ffc107, #ff9800);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Style the container */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the heading */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: sans-serif;
+}
+
+/* Style the form */
+form {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 70%;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button.btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+  background-color: #45a049;
+}
+
+/* Style the recipe grid */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
+  grid-gap: 20px;
+}
+
+/* Style the recipe card */
+.recipe-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Style the recipe image */
+.recipe-image {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Style the recipe details */
+.recipe-details {
+  padding: 20px;
+}
+
+.recipe-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.ingredient-list {
+  margin-bottom: 15px;
+}
+
+.ingredient-list li {
+  margin-bottom: 5px;
+}
+
+.view-recipe {
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.view-recipe:hover {
+  background-color: #e64a19;
+}
+
+.notFound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  height: auto;
+  background-color: white;
+  font-family: sans-serif;
+  text-align: center;
+
+}
+.notFound .input{
+  color: #e64a19;
+}
+.notFound .try{
+    font-size: 13px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+
+/* Responsive styles */
+@media screen and (max-width: 1200px) {
+  .recipe-grid {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* Change to 3 columns on smaller screens */
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .recipe-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Change to 2 columns on even smaller screens */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .recipe-grid {
+    grid-template-columns: 1fr; /* Change to 1 column on mobile screens */
+  }
+}
